@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Delivery : MonoBehaviour
 {
-    bool hasPackage;
+    [SerializeField] bool hasPackage;
+    [SerializeField] float destroyDelay = 0.5f;
     void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("Ouch!");
     }
@@ -13,9 +14,10 @@ public class Delivery : MonoBehaviour
         if (other.tag == "Package"){
             if(!hasPackage){
                 hasPackage = true;    
+                Destroy(other.gameObject, destroyDelay);
                 Debug.Log("Got package! HasPackage: " + hasPackage);
             }else{
-                Debug.Log("You already have the package. HasPackage: " + hasPackage);
+                Debug.Log("You already have a package. HasPackage: " + hasPackage);
             }
 
         }
